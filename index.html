@@ -83,16 +83,38 @@
 
         .hero {
             height: 100vh;
-            background: linear-gradient(135deg, rgba(139, 69, 19, 0.8), rgba(160, 82, 45, 0.8)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="fabric" patternUnits="userSpaceOnUse" width="100" height="100"><rect width="100" height="100" fill="%23f4f4f4"/><path d="M0 0h100v10H0zm0 20h100v10H0zm0 40h100v10H0zm0 60h100v10H0zm0 80h100v10H0z" fill="%23e8e8e8"/></pattern></defs><rect width="1000" height="1000" fill="url(%23fabric)"/></svg>');
+            background: 
+                linear-gradient(135deg, rgba(139, 69, 19, 0.85), rgba(160, 82, 45, 0.85)),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="fabric-weave" patternUnits="userSpaceOnUse" width="40" height="40"><rect width="40" height="40" fill="%23f8f6f0"/><path d="M0 0h20v20H0v20h20v20H20V20h20V0H20v20H0z" fill="%23f0ebe0"/><circle cx="10" cy="10" r="1.5" fill="%23d4af8c"/><circle cx="30" cy="30" r="1.5" fill="%23d4af8c"/></pattern><pattern id="thread-pattern" patternUnits="userSpaceOnUse" width="120" height="120"><rect width="120" height="120" fill="url(%23fabric-weave)"/><path d="M10 10Q30 30 50 10T90 10Q110 30 130 10" stroke="%23c8a882" stroke-width="2" fill="none" opacity="0.6"/><path d="M10 40Q30 60 50 40T90 40Q110 60 130 40" stroke="%23b8956f" stroke-width="1.5" fill="none" opacity="0.5"/><path d="M10 70Q30 90 50 70T90 70Q110 90 130 70" stroke="%23c8a882" stroke-width="2" fill="none" opacity="0.6"/><path d="M10 100Q30 120 50 100T90 100Q110 120 130 100" stroke="%23b8956f" stroke-width="1.5" fill="none" opacity="0.5"/><circle cx="20" cy="25" r="3" fill="%23dcc4a0" opacity="0.7"/><circle cx="60" cy="55" r="2.5" fill="%23e6d5b8" opacity="0.6"/><circle cx="100" cy="85" r="3.5" fill="%23dcc4a0" opacity="0.7"/><path d="M35 15l8 8-8 8-8-8z" fill="%23b8956f" opacity="0.4"/><path d="M75 45l6 6-6 6-6-6z" fill="%23c8a882" opacity="0.5"/><path d="M115 75l7 7-7 7-7-7z" fill="%23b8956f" opacity="0.4"/></pattern></defs><rect width="1200" height="800" fill="url(%23thread-pattern)"/><g opacity="0.3"><path d="M50 50Q200 100 350 50T650 50Q800 100 950 50" stroke="%238B4513" stroke-width="3" fill="none"/><path d="M100 150Q250 200 400 150T700 150Q850 200 1000 150" stroke="%23A0522D" stroke-width="2.5" fill="none"/><path d="M0 250Q150 300 300 250T600 250Q750 300 900 250" stroke="%238B4513" stroke-width="3" fill="none"/><path d="M150 350Q300 400 450 350T750 350Q900 400 1050 350" stroke="%23A0522D" stroke-width="2.5" fill="none"/></g></svg>');
             background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: white;
+            position: relative;
         }
 
-        .hero-content h1 {
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(139, 69, 19, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(160, 82, 45, 0.3) 0%, transparent 50%),
+                linear-gradient(45deg, transparent 30%, rgba(139, 69, 19, 0.1) 50%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
             font-size: 4rem;
             margin-bottom: 1rem;
             text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
@@ -232,36 +254,6 @@
         .product-price {
             font-size: 1.2rem;
             font-weight: bold;
-            color: #8B4513;
-        }
-
-        .services {
-            background: white;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .service-item {
-            text-align: center;
-            padding: 2rem;
-            border-radius: 15px;
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            transition: all 0.3s ease;
-        }
-
-        .service-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-        }
-
-        .service-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
             color: #8B4513;
         }
 
@@ -407,6 +399,7 @@
             .hero {
                 height: 90vh;
                 padding: 2rem 0;
+                background-attachment: scroll;
             }
 
             .hero-content {
@@ -606,7 +599,6 @@
             <ul class="nav-links">
                 <li><a href="#home">בית</a></li>
                 <li><a href="#products">מוצרים</a></li>
-                <li><a href="#services">שירותים</a></li>
                 <li><a href="#about">אודות</a></li>
                 <li><a href="#contact">צור קשר</a></li>
             </ul>
@@ -683,38 +675,6 @@
                         <p>עיצוב ותפירת תחפושות לאירועים ומופעים</p>
                         <div class="product-price">החל מ-₪400</div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="services" class="section services">
-        <div class="container">
-            <h2 class="section-title">השירותים שלנו</h2>
-            <div class="mobile-scroll-hint" style="text-align: center; color: white; margin-bottom: 1rem; font-size: 0.9rem; display: none;">← גלול לצפייה בכל השירותים →</div>
-            <div class="services-grid">
-                <div class="service-item">
-                    <div class="service-icon">📏</div>
-                    <h3>מדידה מקצועית</h3>
-                    <p>מדידות מדויקות להתאמה מושלמת של הבגד לגוף</p>
-                </div>
-                
-                <div class="service-item">
-                    <div class="service-icon">✂️</div>
-                    <h3>עיצוב אישי</h3>
-                    <p>עיצוב בגדים ייחודיים לפי טעם ורצונות הלקוח</p>
-                </div>
-                
-                <div class="service-item">
-                    <div class="service-icon">🧵</div>
-                    <h3>תפירה ידנית</h3>
-                    <p>תפירה מקצועית ברמה גבוהה עם תשומת לב לפרטים</p>
-                </div>
-                
-                <div class="service-item">
-                    <div class="service-icon">🏠</div>
-                    <h3>שירות ביתי</h3>
-                    <p>הגעה לבית הלקוח למדידות והתאמות</p>
                 </div>
             </div>
         </div>
