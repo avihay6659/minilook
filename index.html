@@ -38,14 +38,6 @@
             z-index: 2;
         }
 
-        .bottom-left-content {
-            position: absolute;
-            bottom: 4rem;
-            left: 4rem;
-            z-index: 2;
-            text-align: left;
-        }
-
         .main-title {
             font-size: 8rem;
             font-weight: 900;
@@ -73,8 +65,12 @@
             opacity: 0.9;
         }
 
-        .availability-section {
-            margin-bottom: 2rem;
+        .bottom-left-content {
+            position: absolute;
+            bottom: 4rem;
+            left: 4rem;
+            z-index: 2;
+            text-align: left;
         }
 
         .available-text {
@@ -82,6 +78,7 @@
             font-weight: 700;
             letter-spacing: 0.3rem;
             margin-bottom: 0.5rem;
+            color: #fff;
         }
 
         .collection-text {
@@ -90,6 +87,7 @@
             letter-spacing: 0.2rem;
             opacity: 0.8;
             margin-bottom: 3rem;
+            color: #fff;
         }
 
         .order-btn {
@@ -202,6 +200,210 @@
             justify-content: center;
         }
 
+        /* Products Section */
+        .products-section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 25%, #f8f8f8 50%, #eeeeee 75%, #f5f5f5 100%);
+            padding: 4rem;
+            gap: 2rem;
+        }
+
+        .product-card {
+            flex: 1;
+            height: 70vh;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .product-card:hover {
+            transform: scale(1.02);
+        }
+
+        .left-card {
+            background-image: url('https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2080&q=80');
+        }
+
+        .right-card {
+            background-image: url('https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.7));
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover::before {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6));
+        }
+
+        .product-info {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #fff;
+            padding: 3rem 2rem;
+            width: 100%;
+        }
+
+        .product-badge {
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 0.1rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .product-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: #fff;
+            letter-spacing: 0.2rem;
+            text-transform: uppercase;
+        }
+
+        .product-description {
+            font-size: 1rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        .buy-now-btn {
+            background: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+            padding: 1rem 3rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .buy-now-btn:hover {
+            background: #fff;
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255,255,255,0.3);
+        }
+
+        .buy-now-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .buy-now-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), 
+                        url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .welcome-content {
+            max-width: 600px;
+            z-index: 2;
+        }
+
+        .welcome-text {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 0.8rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+        }
+
+        .welcome-title {
+            font-size: 6rem;
+            font-weight: 900;
+            letter-spacing: 1rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
+            background: linear-gradient(45deg, #fff, #ddd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+
+        .shop-text {
+            font-size: 1.5rem;
+            font-weight: 300;
+            font-style: italic;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+        }
+
+        .season-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .season-btn {
+            background: #fff;
+            border: none;
+            color: #000;
+            padding: 1rem 2.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .season-btn:hover {
+            background: rgba(255,255,255,0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .season-btn.active {
+            background: #000;
+            color: #fff;
+        }
+
         @media (max-width: 768px) {
             .main-title {
                 font-size: 4rem;
@@ -231,6 +433,41 @@
                 font-size: 0.8rem;
                 gap: 1rem;
             }
+
+            .products-section {
+                flex-direction: column;
+                height: auto;
+                padding: 2rem;
+            }
+
+            .product-card {
+                height: 60vh;
+            }
+
+            .product-title {
+                font-size: 1.8rem;
+                letter-spacing: 0.1rem;
+            }
+
+            .product-description {
+                font-size: 0.9rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .buy-now-btn {
+                padding: 0.8rem 2rem;
+                font-size: 0.8rem;
+            }
+
+            .welcome-title {
+                font-size: 3rem;
+                letter-spacing: 0.5rem;
+            }
+
+            .season-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
         }
     </style>
 </head>
@@ -257,16 +494,46 @@
 
         <div class="hero-content">
             <h1 class="main-title">GAME CHANGER</h1>
-            <h2 class="subtitle">Players' Essentials</h2>
         </div>
 
         <div class="bottom-left-content">
-            <div class="availability-section">
-                <div class="available-text">AVAILABLE NOW</div>
-                <div class="collection-text">2025 EARLY COLLECTION</div>
-            </div>
-            
+            <div class="available-text">AVAILABLE NOW</div>
+            <div class="collection-text">EARLY COLLECTION 2025</div>
             <button class="order-btn" onclick="handleOrder()">ORDER NOW</button>
+        </div>
+    </div>
+
+    <!-- Section 2 - Welcome to Game Changers -->
+    <div class="welcome-section">
+        <div class="welcome-content">
+            <div class="welcome-text">WELCOME TO</div>
+            <h2 class="welcome-title">GAME CHANGERS</h2>
+            <div class="shop-text">Shop now.</div>
+            
+            <div class="season-buttons">
+                <button class="season-btn active" onclick="selectSeason('winter')">WINTER 2025</button>
+                <button class="season-btn" onclick="selectSeason('summer')">SUMMER 2025</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 3 - Products Grid -->
+    <div class="products-section">
+        <div class="product-card left-card">
+            <div class="product-info">
+                <div class="product-badge">מלאי מוגבל</div>
+                <div class="product-title">PLAYERS' ENSEMBLES TEES</div>
+                <div class="product-description">חולצות יוקרה אורבנים | 100% כותנה טהורה</div>
+                <button class="buy-now-btn" onclick="buyProduct('tees')">קנה עכשיו</button>
+            </div>
+        </div>
+        <div class="product-card right-card">
+            <div class="product-info">
+                <div class="product-badge">מלאי מוגבל</div>
+                <div class="product-title">PLAYERS' ENSEMBLES HOODIES</div>
+                <div class="product-description">קפוצ'ונים יוקרתיים אורבנים | 100% כותנה פרנץ' טרי</div>
+                <button class="buy-now-btn" onclick="buyProduct('hoodies')">קנה עכשיו</button>
+            </div>
         </div>
     </div>
 
@@ -276,13 +543,55 @@
             // כאן תוכל להוסיף את הלוגיקה של המעבר לעמוד ההזמנה
         }
 
-        // אפקט נוסף לכפתור
-        document.querySelector('.order-btn').addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-3px) scale(1.05)';
-        });
+        function buyProduct(productType) {
+            alert(`רוכש ${productType === 'tees' ? 'חולצות' : 'קפוצ\'ונים'}!`);
+            // כאן תוכל להוסיף לוגיקה לקנייה
+        }
 
-        document.querySelector('.order-btn').addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) scale(1)';
+        function selectSeason(season) {
+            // Remove active class from all buttons
+            document.querySelectorAll('.season-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+            
+            // Here you can add logic to show different collections
+            console.log('Selected season:', season);
+        }
+
+        // אפקט נוסף לכפתור
+        document.addEventListener('DOMContentLoaded', function() {
+            const orderBtn = document.querySelector('.order-btn');
+            if (orderBtn) {
+                orderBtn.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px) scale(1.05)';
+                });
+
+                orderBtn.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            }
+
+            // Add click effects to product cards
+            const productCards = document.querySelectorAll('.product-card');
+            productCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    console.log('Product card clicked');
+                    // Add navigation to product page here
+                });
+            });
+
+            // Smooth scrolling for navigation
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    if (this.getAttribute('href') === '#') {
+                        e.preventDefault();
+                    }
+                });
+            });
         });
     </script>
 </body>
