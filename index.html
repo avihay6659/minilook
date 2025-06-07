@@ -547,7 +547,45 @@
             color: #fff;
         }
 
-                .cart-count {
+                .mobile-left-icons {
+            display: none;
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 15;
+            gap: 1.5rem;
+        }
+
+        .mobile-icon {
+            background: rgba(0,0,0,0.8);
+            border: 2px solid #fff;
+            border-radius: 12px;
+            padding: 1rem;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 55px;
+            height: 55px;
+        }
+
+        .mobile-icon:hover {
+            background: rgba(255,255,255,0.1);
+            transform: scale(1.05);
+        }
+
+        .nav-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-count {
             position: absolute;
             top: -8px;
             right: -8px;
@@ -557,21 +595,6 @@
             width: 18px;
             height: 18px;
             font-size: 0.7rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .mobile-cart-count {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: #ff4444;
-            color: #fff;
-            border-radius: 50%;
-            width: 16px;
-            height: 16px;
-            font-size: 0.6rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -590,7 +613,7 @@
                 display: block;
             }
             
-            .mobile-top-actions {
+            .mobile-left-icons {
                 display: flex;
             }
             
@@ -700,6 +723,20 @@
             <div class="nav-right">
                 <a href="#" class="nav-item">BRAND</a>
                 <a href="#" class="nav-item">PHOTOSHOOT</a>
+                <a href="#" class="nav-item nav-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </a>
+                <a href="#" class="nav-item nav-icon cart-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span class="cart-count">0</span>
+                </a>
             </div>
         </nav>
 
@@ -710,6 +747,24 @@
                 <span></span>
                 <span></span>
             </div>
+        </div>
+
+        <!-- Mobile Left Icons -->
+        <div class="mobile-left-icons">
+            <a href="#" class="mobile-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </a>
+            <a href="#" class="mobile-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg>
+                <span class="cart-badge">0</span>
+            </a>
         </div>
 
         <!-- Mobile Menu Overlay -->
