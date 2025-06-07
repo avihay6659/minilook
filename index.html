@@ -584,21 +584,89 @@
             box-shadow: 0 6px 25px rgba(0,0,0,0.5);
         }
 
-        .cart-badge {
+        /* Collection Section */
+        .collection-section {
+            background: #f8f8f8;
+            padding: 8rem 0;
+            text-align: center;
+        }
+
+        .collection-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .collection-title {
+            font-size: 3rem;
+            font-weight: 900;
+            letter-spacing: 0.3rem;
+            margin-bottom: 5rem;
+            color: #000;
+            text-transform: uppercase;
+        }
+
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+        }
+
+        .collection-item {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .collection-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .collection-image {
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .collection-item:hover .collection-image {
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        .collection-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .collection-item:hover .collection-image img {
+            transform: scale(1.05);
+        }
+
+        .collection-label {
             position: absolute;
-            top: -6px;
-            right: -6px;
-            background: #ff4444;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.95);
+            color: #000;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.2rem;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .collection-item:hover .collection-label {
+            background: rgba(0,0,0,0.9);
             color: #fff;
-            border-radius: 50%;
-            width: 16px;
-            height: 16px;
-            font-size: 0.6rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            border: 1px solid #fff;
+            transform: translateX(-50%) translateY(-5px);
         }
 
         @media (max-width: 768px) {
@@ -741,6 +809,53 @@
             .welcome-content {
                 padding: 2rem 1rem;
             }
+
+            /* Collection Section Mobile */
+            .collection-section {
+                padding: 3rem 0;
+            }
+
+            .collection-container {
+                padding: 0 1rem;
+            }
+
+            .collection-title {
+                font-size: 1.8rem;
+                letter-spacing: 0.1rem;
+                margin-bottom: 2.5rem;
+                line-height: 1.2;
+            }
+
+            .collection-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .collection-image {
+                height: 200px;
+                border-radius: 8px;
+            }
+
+            .collection-label {
+                bottom: 0.8rem;
+                padding: 0.6rem 1rem;
+                font-size: 0.7rem;
+                letter-spacing: 0.05rem;
+                border-radius: 6px;
+                font-weight: 600;
+            }
+
+            .collection-item:hover {
+                transform: none;
+            }
+
+            .collection-item:hover .collection-image {
+                box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            }
+
+            .collection-item:hover .collection-image img {
+                transform: scale(1.02);
+            }
         }
     </style>
 </head>
@@ -865,6 +980,43 @@
                 <div class="product-title">PLAYERS' ENSEMBLES HOODIES</div>
                 <div class="product-description">קפוצ'ונים יוקרתיים אורבנים | 100% כותנה פרנץ' טרי</div>
                 <button class="buy-now-btn" onclick="buyProduct('hoodies')">קנה עכשיו</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 4 - Players' Ensembles Collection -->
+    <div class="collection-section">
+        <div class="collection-container">
+            <h2 class="collection-title">PLAYERS' ENSEMBLES COLLECTION</h2>
+            
+            <div class="collection-grid">
+                <div class="collection-item">
+                    <div class="collection-image">
+                        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="T-Shirts">
+                    </div>
+                    <div class="collection-label">T-SHIRTS</div>
+                </div>
+                
+                <div class="collection-item">
+                    <div class="collection-image">
+                        <img src="https://images.unsplash.com/photo-1588117472013-59bb13edafec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Accessories">
+                    </div>
+                    <div class="collection-label">ACCESSORIES</div>
+                </div>
+                
+                <div class="collection-item">
+                    <div class="collection-image">
+                        <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Hoodies">
+                    </div>
+                    <div class="collection-label">HOODIES</div>
+                </div>
+                
+                <div class="collection-item">
+                    <div class="collection-image">
+                        <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Sweatpants">
+                    </div>
+                    <div class="collection-label">SWEATPANTS</div>
+                </div>
             </div>
         </div>
     </div>
