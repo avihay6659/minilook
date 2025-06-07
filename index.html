@@ -1,4 +1,18 @@
-<!DOCTYPE html>
+</a>
+            </div>
+        </nav>
+
+        <!-- User Dropdown -->
+        <div id="user-dropdown" class="user-dropdown">
+            <div class="user-info">
+                <h4 id="dropdown-user-name">שם המשתמש</h4>
+                <p id="dropdown-user-email">user@example.com</p>
+            </div>
+            <a href="#" class="dropdown-item">הפרופיל שלי</a>
+            <a href="#" class="dropdown-item">ההזמנות שלי</a>
+            <a href="#" class="dropdown-item">הגדרות</a>
+            <a href="#" class="dropdown-item" onclick="logout()">התנתק</a>
+        </div><!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -669,7 +683,68 @@
             transform: translateX(-50%) translateY(-5px);
         }
 
-        @media (max-width: 768px) {
+        .user-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1rem;
+            min-width: 200px;
+            display: none;
+            z-index: 1000;
+            margin-top: 0.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .user-dropdown.show {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .user-info {
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 1rem;
+        }
+
+        .user-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .user-info p {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        .dropdown-item {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .dropdown-item:hover {
+            opacity: 0.7;
+            padding-right: 0.5rem;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+            color: #ff6b6b;
+        }
+
+        .user-logged-in {
+            background: rgba(0, 255, 0, 0.1) !important;
+            border-color: rgba(0, 255, 0, 0.3) !important;
+        }
             .mobile-nav-bar {
                 display: block;
             }
@@ -885,11 +960,12 @@
             <div class="nav-right">
                 <a href="#" class="nav-item">BRAND</a>
                 <a href="#" class="nav-item">PHOTOSHOOT</a>
-                <a href="#" class="nav-item nav-icon">
+                <a href="#" class="nav-item nav-icon" id="user-icon" onclick="handleUserClick()">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
+                    <span id="user-name" style="display: none; margin-right: 0.5rem; font-size: 0.8rem;"></span>
                 </a>
                 <a href="#" class="nav-item nav-icon cart-icon">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -913,7 +989,7 @@
 
         <!-- Mobile Left Icons -->
         <div class="mobile-left-icons">
-            <a href="#" class="mobile-icon">
+            <a href="#" class="mobile-icon" id="mobile-user-icon" onclick="handleUserClick()">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                     <circle cx="12" cy="7" r="4"></circle>
@@ -943,7 +1019,7 @@
             <a href="#" class="mobile-nav-item">PHOTOSHOOT</a>
             
             <div class="mobile-user-actions">
-                <a href="#" class="mobile-action-btn">👤 Profile</a>
+                <a href="#" class="mobile-action-btn" id="mobile-profile-btn" onclick="handleUserClick()">👤 Profile</a>
                 <a href="#" class="mobile-action-btn">🛒 Cart</a>
             </div>
         </div>
@@ -1074,8 +1150,70 @@
             overlay.classList.remove('active');
         }
 
+        // User Management Functions
+        function handleUserClick() {
+            const userData = localStorage.getItem('gameChangerUser');
+            
+            if (userData) {
+                // User is logged in - toggle dropdown
+                toggleUserDropdown();
+            } else {
+                // User is not logged in - redirect to login page
+                window.location.href = 'account.html';
+            }
+        }
+
+        function toggleUserDropdown() {
+            const dropdown = document.getElementById('user-dropdown');
+            dropdown.classList.toggle('show');
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('#user-icon') && !event.target.closest('#user-dropdown')) {
+                    dropdown.classList.remove('show');
+                }
+            });
+        }
+
+        function updateUserUI() {
+            const userData = localStorage.getItem('gameChangerUser');
+            
+            if (userData) {
+                const user = JSON.parse(userData);
+                
+                // Update desktop navigation
+                const userIcon = document.getElementById('user-icon');
+                const userName = document.getElementById('user-name');
+                
+                userIcon.classList.add('user-logged-in');
+                userName.textContent = user.name;
+                userName.style.display = 'inline';
+                
+                // Update mobile navigation
+                const mobileUserIcon = document.getElementById('mobile-user-icon');
+                const mobileProfileBtn = document.getElementById('mobile-profile-btn');
+                
+                mobileUserIcon.classList.add('user-logged-in');
+                mobileProfileBtn.innerHTML = `👤 ${user.name}`;
+                
+                // Update dropdown
+                document.getElementById('dropdown-user-name').textContent = user.name;
+                document.getElementById('dropdown-user-email').textContent = user.email;
+            }
+        }
+
+        function logout() {
+            if (confirm('האם אתה בטוח שברצונך להתנתק?')) {
+                localStorage.removeItem('gameChangerUser');
+                location.reload(); // Refresh page to reset UI
+            }
+        }
+
         // אפקט נוסף לכפתור
         document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in and update UI
+            updateUserUI();
+            
             const orderBtn = document.querySelector('.order-btn');
             if (orderBtn) {
                 orderBtn.addEventListener('mouseenter', function() {
