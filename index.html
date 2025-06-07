@@ -1,18 +1,4 @@
-</a>
-            </div>
-        </nav>
-
-        <!-- User Dropdown -->
-        <div id="user-dropdown" class="user-dropdown">
-            <div class="user-info">
-                <h4 id="dropdown-user-name">שם המשתמש</h4>
-                <p id="dropdown-user-email">user@example.com</p>
-            </div>
-            <a href="#" class="dropdown-item">הפרופיל שלי</a>
-            <a href="#" class="dropdown-item">ההזמנות שלי</a>
-            <a href="#" class="dropdown-item">הגדרות</a>
-            <a href="#" class="dropdown-item" onclick="logout()">התנתק</a>
-        </div><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -564,7 +550,7 @@
             color: #fff;
         }
 
-                .mobile-left-icons {
+        .mobile-left-icons {
             display: none;
             position: fixed;
             top: 1.5rem;
@@ -745,13 +731,13 @@
             background: rgba(0, 255, 0, 0.1) !important;
             border-color: rgba(0, 255, 0, 0.3) !important;
         }
-            .mobile-nav-bar {
-                display: block;
-            }
-            
-            .hero-section {
-                padding-top: 80px;
-            }
+
+        .mobile-nav-bar {
+            display: block;
+        }
+        
+        .hero-section {
+            padding-top: 80px;
         }
 
         .nav-icon {
@@ -776,9 +762,6 @@
         }
 
         @media (max-width: 768px) {
-            .nav-bar {
-                display: none !important;
-            }
             .nav-bar {
                 display: none !important;
             }
@@ -876,7 +859,6 @@
                 align-items: center;
             }
 
-            /* שיפור הגלילה במובייל */
             body {
                 scroll-snap-type: y mandatory;
             }
@@ -885,7 +867,6 @@
                 scroll-snap-align: start;
             }
             
-            /* שיפור המרווחים במובייל */
             .hero-content {
                 padding: 2rem 1rem;
             }
@@ -894,7 +875,6 @@
                 padding: 2rem 1rem;
             }
 
-            /* Collection Section Mobile */
             .collection-section {
                 padding: 3rem 0;
             }
@@ -944,7 +924,7 @@
     </style>
 </head>
 <body>
-        <div class="hero-section">
+    <div class="hero-section">
         <!-- Mobile Sticky Navigation Bar -->
         <div class="mobile-nav-bar"></div>
         
@@ -977,6 +957,18 @@
                 </a>
             </div>
         </nav>
+
+        <!-- User Dropdown -->
+        <div id="user-dropdown" class="user-dropdown">
+            <div class="user-info">
+                <h4 id="dropdown-user-name">שם המשתמש</h4>
+                <p id="dropdown-user-email">user@example.com</p>
+            </div>
+            <a href="#" class="dropdown-item">הפרופיל שלי</a>
+            <a href="#" class="dropdown-item">ההזמנות שלי</a>
+            <a href="#" class="dropdown-item">הגדרות</a>
+            <a href="#" class="dropdown-item" onclick="logout()">התנתק</a>
+        </div>
 
         <!-- Mobile Hamburger Menu -->
         <div class="hamburger-menu" onclick="toggleMobileMenu()">
@@ -1152,7 +1144,7 @@
 
         // User Management Functions
         function handleUserClick() {
-            const userData = localStorage.getItem('gameChangerUser');
+            const userData = sessionStorage.getItem('gameChangerUser');
             
             if (userData) {
                 // User is logged in - toggle dropdown
@@ -1176,7 +1168,7 @@
         }
 
         function updateUserUI() {
-            const userData = localStorage.getItem('gameChangerUser');
+            const userData = sessionStorage.getItem('gameChangerUser');
             
             if (userData) {
                 const user = JSON.parse(userData);
@@ -1204,7 +1196,7 @@
 
         function logout() {
             if (confirm('האם אתה בטוח שברצונך להתנתק?')) {
-                localStorage.removeItem('gameChangerUser');
+                sessionStorage.removeItem('gameChangerUser');
                 location.reload(); // Refresh page to reset UI
             }
         }
