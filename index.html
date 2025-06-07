@@ -16,6 +16,8 @@
             background-color: #000;
             color: #fff;
             overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
         }
 
         .hero-section {
@@ -187,19 +189,23 @@
 
         .hamburger-menu {
             display: none;
-            position: absolute;
+            position: fixed;
             top: 2rem;
-            right: 2rem;
+            left: 2rem;
             z-index: 15;
-            background: rgba(255,255,255,0.1);
+            background: rgba(0,0,0,0.8);
             border: 2px solid #fff;
-            padding: 0.8rem;
+            border-radius: 8px;
+            padding: 1rem;
             cursor: pointer;
             transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
         .hamburger-menu:hover {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.1);
+            transform: scale(1.05);
         }
 
         .hamburger-icon {
@@ -233,17 +239,19 @@
             display: none;
             position: fixed;
             top: 0;
-            right: -100%;
+            left: -100%;
             width: 80%;
             height: 100vh;
             background: rgba(0,0,0,0.95);
             z-index: 12;
-            transition: right 0.3s ease;
+            transition: left 0.4s ease;
             padding: 6rem 2rem 2rem;
+            backdrop-filter: blur(15px);
+            box-shadow: 5px 0 20px rgba(0,0,0,0.5);
         }
 
         .mobile-menu.active {
-            right: 0;
+            left: 0;
         }
 
         .mobile-menu-overlay {
@@ -533,7 +541,7 @@
             color: #fff;
         }
 
-        .cart-count {
+                .cart-count {
             position: absolute;
             top: -8px;
             right: -8px;
@@ -543,6 +551,21 @@
             width: 18px;
             height: 18px;
             font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mobile-cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff4444;
+            color: #fff;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            font-size: 0.6rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -560,6 +583,11 @@
             .mobile-menu {
                 display: block;
             }
+            
+            .mobile-top-actions {
+                display: flex;
+            }
+            
             .main-title {
                 font-size: 4rem;
                 letter-spacing: 0.5rem;
@@ -593,10 +621,12 @@
                 flex-direction: column;
                 height: auto;
                 padding: 2rem;
+                scroll-snap-align: start;
             }
 
             .product-card {
                 height: 60vh;
+                margin-bottom: 2rem;
             }
 
             .product-title {
@@ -622,6 +652,24 @@
             .season-buttons {
                 flex-direction: column;
                 align-items: center;
+            }
+
+            /* שיפור הגלילה במובייל */
+            body {
+                scroll-snap-type: y mandatory;
+            }
+            
+            .hero-section, .welcome-section {
+                scroll-snap-align: start;
+            }
+            
+            /* שיפור המרווחים במובייל */
+            .hero-content {
+                padding: 2rem 1rem;
+            }
+            
+            .welcome-content {
+                padding: 2rem 1rem;
             }
         }
     </style>
@@ -655,6 +703,15 @@
                 <span></span>
                 <span></span>
             </div>
+        </div>
+
+        <!-- Mobile Top Actions -->
+        <div class="mobile-top-actions">
+            <a href="#">👤</a>
+            <a href="#" class="cart-icon">
+                🛒
+                <span class="mobile-cart-count">0</span>
+            </a>
         </div>
 
         <!-- Mobile Menu Overlay -->
@@ -765,7 +822,7 @@
             overlay.classList.remove('active');
         }
 
-        // Parallax scrolling effect
+        // אפקט נוסף לכפתור
         document.addEventListener('DOMContentLoaded', function() {
             const orderBtn = document.querySelector('.order-btn');
             if (orderBtn) {
@@ -796,50 +853,6 @@
                     }
                 });
             });
-
-            // Enhanced parallax effect for desktop
-            if (window.innerWidth > 768) {
-                window.addEventListener('scroll', function() {
-                    const scrolled = window.pageYOffset;
-                    const parallaxElements = document.querySelectorAll('.hero-section, .welcome-section, .products-section');
-                    
-                    parallaxElements.forEach((element, index) => {
-                        const rate = scrolled * -0.5;
-                        element.style.transform = `translateY(${rate}px)`;
-                    });
-                });
-            }
-
-            // Smooth scroll animation for mobile
-            if (window.innerWidth <= 768) {
-                let ticking = false;
-                
-                function updateParallax() {
-                    const scrolled = window.pageYOffset;
-                    const heroSection = document.querySelector('.hero-section');
-                    const welcomeSection = document.querySelector('.welcome-section');
-                    const productsSection = document.querySelector('.products-section');
-                    
-                    if (heroSection) {
-                        heroSection.style.transform = `translateY(${scrolled * 0.3}px)`;
-                    }
-                    if (welcomeSection) {
-                        welcomeSection.style.transform = `translateY(${scrolled * 0.2}px)`;
-                    }
-                    if (productsSection) {
-                        productsSection.style.transform = `translateY(${scrolled * 0.1}px)`;
-                    }
-                    
-                    ticking = false;
-                }
-                
-                window.addEventListener('scroll', function() {
-                    if (!ticking) {
-                        requestAnimationFrame(updateParallax);
-                        ticking = true;
-                    }
-                });
-            }
         });
     </script>
 </body>
