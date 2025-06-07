@@ -210,219 +210,6 @@
             position: relative;
         }
 
-        .user-nav-container {
-            position: relative;
-            display: inline-block;
-        }
-
-        .user-dropdown {
-            position: absolute;
-            top: calc(100% + 15px);
-            right: 0;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
-            padding: 1.5rem;
-            min-width: 280px;
-            display: none;
-            z-index: 1000;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
-            animation: slideDown 0.3s ease-out;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .user-dropdown.show {
-            display: block;
-        }
-
-        .user-dropdown::before {
-            content: '';
-            position: absolute;
-            top: -8px;
-            right: 20px;
-            width: 0;
-            height: 0;
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            border-bottom: 8px solid rgba(0, 0, 0, 0.95);
-        }
-
-        .user-info {
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-
-        .user-avatar {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(45deg, #fff, #f0f0f0);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: #000;
-            margin: 0 auto 1rem;
-            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
-        }
-
-        .user-info h4 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-            color: #fff;
-            letter-spacing: 0.05rem;
-        }
-
-        .user-info p {
-            font-size: 0.85rem;
-            opacity: 0.7;
-            color: #ccc;
-        }
-
-        .user-status {
-            display: inline-block;
-            background: linear-gradient(45deg, #4ade80, #22c55e);
-            color: #000;
-            padding: 0.2rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            margin-top: 0.5rem;
-            letter-spacing: 0.05rem;
-        }
-
-        .dropdown-item {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            color: #fff;
-            text-decoration: none;
-            padding: 1rem;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .dropdown-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateX(-3px);
-            border-color: rgba(255, 255, 255, 0.15);
-        }
-
-        .dropdown-item:last-child {
-            margin-bottom: 0;
-            background: rgba(255, 59, 59, 0.1);
-            border-color: rgba(255, 59, 59, 0.2);
-            color: #ff6b6b;
-        }
-
-        .dropdown-item:last-child:hover {
-            background: rgba(255, 59, 59, 0.2);
-            color: #fff;
-        }
-
-        .dropdown-icon {
-            width: 18px;
-            height: 18px;
-            opacity: 0.8;
-        }
-
-        .user-logged-in {
-            background: rgba(34, 197, 94, 0.15) !important;
-            border: 2px solid rgba(34, 197, 94, 0.3) !important;
-            box-shadow: 0 0 20px rgba(34, 197, 94, 0.2) !important;
-        }
-
-        .user-name-display {
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-right: 0.5rem;
-            opacity: 0.9;
-            letter-spacing: 0.05rem;
-        }
-
-        /* Mobile User Menu Updates */
-        .mobile-user-menu {
-            display: none;
-            position: fixed;
-            bottom: 2rem;
-            left: 2rem;
-            right: 2rem;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            padding: 2rem;
-            z-index: 1000;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
-        }
-
-        .mobile-user-menu.show {
-            display: block;
-            animation: slideUp 0.3s ease-out;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .mobile-user-header {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-dropdown-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            color: #fff;
-            text-decoration: none;
-            padding: 1rem;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            font-size: 1rem;
-            font-weight: 500;
-            margin-bottom: 0.8rem;
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .mobile-dropdown-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-dropdown-item:last-child {
-            background: rgba(255, 59, 59, 0.1);
-            color: #ff6b6b;
-        }
-
         .hamburger-menu {
             display: none;
             position: fixed;
@@ -1232,53 +1019,9 @@
             <a href="#" class="mobile-nav-item">PHOTOSHOOT</a>
             
             <div class="mobile-user-actions">
-                <a href="#" class="mobile-action-btn" id="mobile-profile-btn" onclick="handleMobileUserClick()">👤 Profile</a>
+                <a href="#" class="mobile-action-btn" id="mobile-profile-btn" onclick="handleUserClick()">👤 Profile</a>
                 <a href="#" class="mobile-action-btn">🛒 Cart</a>
             </div>
-        </div>
-
-        <!-- Mobile User Menu -->
-        <div id="mobile-user-menu" class="mobile-user-menu">
-            <div class="mobile-user-header">
-                <div class="user-avatar" id="mobile-user-avatar">G</div>
-                <h4 id="mobile-user-name">שם המשתמש</h4>
-                <p id="mobile-user-email">user@example.com</p>
-                <span class="user-status">מחובר</span>
-            </div>
-            
-            <a href="profile.html" class="mobile-dropdown-item">
-                <svg class="dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
-                </svg>
-                האיזור האישי שלי
-            </a>
-            
-            <a href="#" class="mobile-dropdown-item">
-                <svg class="dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <path d="M16 10a4 4 0 0 1-8 0"></path>
-                </svg>
-                ההזמנות שלי
-            </a>
-            
-            <a href="#" class="mobile-dropdown-item">
-                <svg class="dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="3"></circle>
-                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-                </svg>
-                הגדרות חשבון
-            </a>
-            
-            <a href="#" class="mobile-dropdown-item" onclick="logout()">
-                <svg class="dropdown-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                    <polyline points="16,17 21,12 16,7"></polyline>
-                    <line x1="21" y1="12" x2="9" y2="12"></line>
-                </svg>
-                התנתק מהחשבון
-            </a>
         </div>
 
         <div class="hero-content">
@@ -1420,38 +1163,16 @@
             }
         }
 
-        function handleMobileUserClick() {
-            const userData = localStorage.getItem('gameChangerUser');
-            
-            if (userData) {
-                // User is logged in - toggle mobile menu
-                toggleMobileUserMenu();
-            } else {
-                // User is not logged in - redirect to login page
-                window.location.href = 'account.html';
-            }
-        }
-
         function toggleUserDropdown() {
             const dropdown = document.getElementById('user-dropdown');
-            const mobileMenu = document.getElementById('mobile-user-menu');
-            
-            // Close mobile menu if open
-            mobileMenu.classList.remove('show');
-            
-            // Toggle desktop dropdown
             dropdown.classList.toggle('show');
-        }
-
-        function toggleMobileUserMenu() {
-            const mobileMenu = document.getElementById('mobile-user-menu');
-            const dropdown = document.getElementById('user-dropdown');
             
-            // Close desktop dropdown if open
-            dropdown.classList.remove('show');
-            
-            // Toggle mobile menu
-            mobileMenu.classList.toggle('show');
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('#user-icon') && !event.target.closest('#user-dropdown')) {
+                    dropdown.classList.remove('show');
+                }
+            });
         }
 
         function updateUserUI() {
@@ -1459,86 +1180,10 @@
             
             if (userData) {
                 const user = JSON.parse(userData);
-                const firstName = user.name.split(' ')[0]; // Get first name only
-                const userInitial = user.name.charAt(0).toUpperCase();
                 
                 // Update desktop navigation
                 const userIcon = document.getElementById('user-icon');
                 const userName = document.getElementById('user-name');
-                
-                userIcon.classList.add('user-logged-in');
-                userName.textContent = firstName;
-                userName.style.display = 'inline';
-                
-                // Update mobile navigation
-                const mobileUserIcon = document.getElementById('mobile-user-icon');
-                const mobileProfileBtn = document.getElementById('mobile-profile-btn');
-                
-                if (mobileUserIcon) mobileUserIcon.classList.add('user-logged-in');
-                if (mobileProfileBtn) mobileProfileBtn.innerHTML = `👤 ${firstName}`;
-                
-                // Update desktop dropdown
-                document.getElementById('dropdown-user-name').textContent = user.name;
-                document.getElementById('dropdown-user-email').textContent = user.email;
-                document.getElementById('user-avatar').textContent = userInitial;
-                
-                // Update mobile menu
-                document.getElementById('mobile-user-name').textContent = user.name;
-                document.getElementById('mobile-user-email').textContent = user.email;
-                document.getElementById('mobile-user-avatar').textContent = userInitial;
-            }
-        }
-
-        function logout() {
-            if (confirm('האם אתה בטוח שברצונך להתנתק מהחשבון?')) {
-                localStorage.removeItem('gameChangerUser');
-                
-                // Show logout message
-                const logoutMessage = document.createElement('div');
-                logoutMessage.innerHTML = `
-                    <div style="
-                        position: fixed; 
-                        top: 50%; 
-                        left: 50%; 
-                        transform: translate(-50%, -50%); 
-                        background: rgba(0,0,0,0.9); 
-                        color: white; 
-                        padding: 2rem; 
-                        border-radius: 15px; 
-                        text-align: center; 
-                        z-index: 9999;
-                        backdrop-filter: blur(20px);
-                        border: 1px solid rgba(255,255,255,0.2);
-                        box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-                    ">
-                        <h3 style="margin-bottom: 1rem; font-size: 1.2rem;">התנתקת בהצלחה!</h3>
-                        <p style="opacity: 0.8;">מעביר אותך לעמוד הראשי...</p>
-                    </div>
-                `;
-                
-                document.body.appendChild(logoutMessage);
-                
-                setTimeout(() => {
-                    document.body.removeChild(logoutMessage);
-                    location.reload(); // Refresh page to reset UI
-                }, 2000);
-            }
-        }
-
-        // Close dropdowns when clicking outside
-        document.addEventListener('click', function(event) {
-            const dropdown = document.getElementById('user-dropdown');
-            const mobileMenu = document.getElementById('mobile-user-menu');
-            const userIcon = document.getElementById('user-icon');
-            const mobileProfileBtn = document.getElementById('mobile-profile-btn');
-            
-            if (!event.target.closest('.user-nav-container') && 
-                !event.target.closest('#mobile-user-menu') &&
-                !event.target.closest('#mobile-profile-btn')) {
-                dropdown.classList.remove('show');
-                mobileMenu.classList.remove('show');
-            }
-        }); = document.getElementById('user-name');
                 
                 userIcon.classList.add('user-logged-in');
                 userName.textContent = user.name;
