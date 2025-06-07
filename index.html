@@ -185,19 +185,144 @@
             position: relative;
         }
 
-        .cart-count {
+        .hamburger-menu {
+            display: none;
             position: absolute;
-            top: -8px;
-            right: -8px;
-            background: #ff4444;
+            top: 2rem;
+            right: 2rem;
+            z-index: 15;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid #fff;
+            padding: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger-menu:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .hamburger-icon {
+            width: 25px;
+            height: 20px;
+            position: relative;
+        }
+
+        .hamburger-icon span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: #fff;
+            margin: 4px 0;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger-menu.active .hamburger-icon span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger-menu.active .hamburger-icon span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-menu.active .hamburger-icon span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            height: 100vh;
+            background: rgba(0,0,0,0.95);
+            z-index: 12;
+            transition: right 0.3s ease;
+            padding: 6rem 2rem 2rem;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0,0,0,0.5);
+            z-index: 11;
+        }
+
+        .mobile-menu-overlay.active {
+            display: block;
+        }
+
+        .mobile-nav-item {
+            display: block;
             color: #fff;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.2rem;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-item:hover {
+            color: #ccc;
+            padding-right: 1rem;
+        }
+
+        .mobile-logo {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .mobile-logo-circle {
+            width: 80px;
+            height: 80px;
+            background: #fff;
             border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            font-size: 0.7rem;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #000;
+            margin: 0 auto 1rem;
+        }
+
+        .mobile-user-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-start;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .mobile-action-btn {
+            background: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .mobile-action-btn:hover {
+            background: #fff;
+            color: #000;
         }
 
         /* Products Section */
@@ -205,7 +330,11 @@
             height: 100vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 25%, #f8f8f8 50%, #eeeeee 75%, #f5f5f5 100%);
+            background: linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.1)), 
+                        url('https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             padding: 4rem;
             gap: 2rem;
         }
@@ -404,7 +533,33 @@
             color: #fff;
         }
 
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff4444;
+            color: #fff;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         @media (max-width: 768px) {
+            .nav-bar {
+                display: none;
+            }
+
+            .hamburger-menu {
+                display: block;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
             .main-title {
                 font-size: 4rem;
                 letter-spacing: 0.5rem;
@@ -473,6 +628,7 @@
 </head>
 <body>
     <div class="hero-section">
+        <!-- Desktop Navigation -->
         <nav class="nav-bar">
             <div class="nav-left">
                 <a href="#" class="nav-item">COLLECTIONS</a>
@@ -491,6 +647,34 @@
                 </a>
             </div>
         </nav>
+
+        <!-- Mobile Hamburger Menu -->
+        <div class="hamburger-menu" onclick="toggleMobileMenu()">
+            <div class="hamburger-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu-overlay" onclick="closeMobileMenu()"></div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
+            <div class="mobile-logo">
+                <div class="mobile-logo-circle">G</div>
+            </div>
+            <a href="#" class="mobile-nav-item">COLLECTIONS</a>
+            <a href="#" class="mobile-nav-item">MADE IN ISRAEL</a>
+            <a href="#" class="mobile-nav-item">BRAND</a>
+            <a href="#" class="mobile-nav-item">PHOTOSHOOT</a>
+            
+            <div class="mobile-user-actions">
+                <a href="#" class="mobile-action-btn">👤 Profile</a>
+                <a href="#" class="mobile-action-btn">🛒 Cart</a>
+            </div>
+        </div>
 
         <div class="hero-content">
             <h1 class="main-title">GAME CHANGER</h1>
@@ -561,7 +745,27 @@
             console.log('Selected season:', season);
         }
 
-        // אפקט נוסף לכפתור
+        function toggleMobileMenu() {
+            const hamburger = document.querySelector('.hamburger-menu');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const overlay = document.querySelector('.mobile-menu-overlay');
+            
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        function closeMobileMenu() {
+            const hamburger = document.querySelector('.hamburger-menu');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const overlay = document.querySelector('.mobile-menu-overlay');
+            
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+
+        // Parallax scrolling effect
         document.addEventListener('DOMContentLoaded', function() {
             const orderBtn = document.querySelector('.order-btn');
             if (orderBtn) {
@@ -592,6 +796,50 @@
                     }
                 });
             });
+
+            // Enhanced parallax effect for desktop
+            if (window.innerWidth > 768) {
+                window.addEventListener('scroll', function() {
+                    const scrolled = window.pageYOffset;
+                    const parallaxElements = document.querySelectorAll('.hero-section, .welcome-section, .products-section');
+                    
+                    parallaxElements.forEach((element, index) => {
+                        const rate = scrolled * -0.5;
+                        element.style.transform = `translateY(${rate}px)`;
+                    });
+                });
+            }
+
+            // Smooth scroll animation for mobile
+            if (window.innerWidth <= 768) {
+                let ticking = false;
+                
+                function updateParallax() {
+                    const scrolled = window.pageYOffset;
+                    const heroSection = document.querySelector('.hero-section');
+                    const welcomeSection = document.querySelector('.welcome-section');
+                    const productsSection = document.querySelector('.products-section');
+                    
+                    if (heroSection) {
+                        heroSection.style.transform = `translateY(${scrolled * 0.3}px)`;
+                    }
+                    if (welcomeSection) {
+                        welcomeSection.style.transform = `translateY(${scrolled * 0.2}px)`;
+                    }
+                    if (productsSection) {
+                        productsSection.style.transform = `translateY(${scrolled * 0.1}px)`;
+                    }
+                    
+                    ticking = false;
+                }
+                
+                window.addEventListener('scroll', function() {
+                    if (!ticking) {
+                        requestAnimationFrame(updateParallax);
+                        ticking = true;
+                    }
+                });
+            }
         });
     </script>
 </body>
