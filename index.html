@@ -33,6 +33,7 @@
             align-items: center;
             text-align: center;
             position: relative;
+            padding-top: 100px;
         }
 
         .hero-content {
@@ -130,22 +131,24 @@
         }
 
         .nav-bar {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            padding: 2rem 4rem;
+            padding: 1.5rem 4rem;
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 10;
+            z-index: 100;
             gap: 3rem;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
         }
 
-        @media (max-width: 768px) {
-            .nav-bar {
-                display: none !important;
-            }
+        .nav-bar:hover {
+            background: rgba(0,0,0,0.4);
         }
 
         .nav-left {
@@ -196,9 +199,9 @@
         .hamburger-menu {
             display: none;
             position: fixed;
-            top: 2rem;
+            top: 1.5rem;
             right: 2rem;
-            z-index: 15;
+            z-index: 101;
             background: rgba(0,0,0,0.8);
             border: 2px solid #fff;
             border-radius: 8px;
@@ -550,33 +553,62 @@
                 .mobile-left-icons {
             display: none;
             position: fixed;
-            top: 2rem;
+            top: 1.5rem;
             left: 2rem;
-            z-index: 15;
-            gap: 1.5rem;
+            z-index: 101;
+            gap: 1rem;
         }
 
         .mobile-icon {
-            background: rgba(0,0,0,0.8);
-            border: 2px solid #fff;
-            border-radius: 12px;
-            padding: 1rem;
+            background: rgba(0,0,0,0.7);
+            border: 2px solid rgba(255,255,255,0.8);
+            border-radius: 8px;
+            padding: 0.8rem;
             color: #fff;
             text-decoration: none;
             transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 55px;
-            height: 55px;
+            width: 48px;
+            height: 48px;
         }
 
         .mobile-icon:hover {
-            background: rgba(255,255,255,0.1);
-            transform: scale(1.05);
+            background: rgba(255,255,255,0.15);
+            border-color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.5);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background: #ff4444;
+            color: #fff;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            font-size: 0.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border: 1px solid #fff;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-nav-bar {
+                display: block;
+            }
+            
+            .hero-section {
+                padding-top: 80px;
+            }
         }
 
         .nav-icon {
@@ -601,6 +633,9 @@
         }
 
         @media (max-width: 768px) {
+            .nav-bar {
+                display: none !important;
+            }
             .nav-bar {
                 display: none !important;
             }
@@ -710,7 +745,10 @@
     </style>
 </head>
 <body>
-    <div class="hero-section">
+        <div class="hero-section">
+        <!-- Mobile Sticky Navigation Bar -->
+        <div class="mobile-nav-bar"></div>
+        
         <!-- Desktop Navigation -->
         <nav class="nav-bar">
             <div class="nav-left">
