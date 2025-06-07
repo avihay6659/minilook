@@ -1492,7 +1492,36 @@
         function logout() {
             if (confirm('האם אתה בטוח שברצונך להתנתק מהחשבון?')) {
                 localStorage.removeItem('gameChangerUser');
-                location.reload(); // Refresh page to reset UI
+                
+                // Show logout message
+                const logoutMessage = document.createElement('div');
+                logoutMessage.innerHTML = `
+                    <div style="
+                        position: fixed; 
+                        top: 50%; 
+                        left: 50%; 
+                        transform: translate(-50%, -50%); 
+                        background: rgba(0,0,0,0.9); 
+                        color: white; 
+                        padding: 2rem; 
+                        border-radius: 15px; 
+                        text-align: center; 
+                        z-index: 9999;
+                        backdrop-filter: blur(20px);
+                        border: 1px solid rgba(255,255,255,0.2);
+                        box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+                    ">
+                        <h3 style="margin-bottom: 1rem; font-size: 1.2rem;">התנתקת בהצלחה!</h3>
+                        <p style="opacity: 0.8;">מעביר אותך לעמוד הראשי...</p>
+                    </div>
+                `;
+                
+                document.body.appendChild(logoutMessage);
+                
+                setTimeout(() => {
+                    document.body.removeChild(logoutMessage);
+                    location.reload(); // Refresh page to reset UI
+                }, 2000);
             }
         }
 
@@ -1509,51 +1538,7 @@
                 dropdown.classList.remove('show');
                 mobileMenu.classList.remove('show');
             }
-        });
-
-        // Original functions that were working
-        function handleOrder() {
-            alert('מעבר לעמוד ההזמנה!');
-            // כאן תוכל להוסיף את הלוגיקה של המעבר לעמוד ההזמנה
-        }
-
-        function buyProduct(productType) {
-            alert(`רוכש ${productType === 'tees' ? 'חולצות' : 'קפוצ\'ונים'}!`);
-            // כאן תוכל להוסיף לוגיקה לקנייה
-        }
-
-        function selectSeason(season) {
-            // Remove active class from all buttons
-            document.querySelectorAll('.season-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            // Add active class to clicked button
-            event.target.classList.add('active');
-            
-            // Here you can add logic to show different collections
-            console.log('Selected season:', season);
-        }
-
-        function toggleMobileMenu() {
-            const hamburger = document.querySelector('.hamburger-menu');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            const overlay = document.querySelector('.mobile-menu-overlay');
-            
-            hamburger.classList.toggle('active');
-            mobileMenu.classList.toggle('active');
-            overlay.classList.toggle('active');
-        }
-
-        function closeMobileMenu() {
-            const hamburger = document.querySelector('.hamburger-menu');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            const overlay = document.querySelector('.mobile-menu-overlay');
-            
-            hamburger.classList.remove('active');
-            mobileMenu.classList.remove('active');
-            overlay.classList.remove('active');
-        } = document.getElementById('user-name');
+        }); = document.getElementById('user-name');
                 
                 userIcon.classList.add('user-logged-in');
                 userName.textContent = user.name;
@@ -1585,38 +1570,6 @@
             updateUserUI();
             
             const orderBtn = document.querySelector('.order-btn');
-            if (orderBtn) {
-                orderBtn.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-3px) scale(1.05)';
-                });
-
-                orderBtn.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
-                });
-            }
-
-            // Add click effects to product cards
-            const productCards = document.querySelectorAll('.product-card');
-            productCards.forEach(card => {
-                card.addEventListener('click', function() {
-                    console.log('Product card clicked');
-                    // Add navigation to product page here
-                });
-            });
-
-            // Smooth scrolling for navigation
-            const navItems = document.querySelectorAll('.nav-item');
-            navItems.forEach(item => {
-                item.addEventListener('click', function(e) {
-                    if (this.getAttribute('href') === '#') {
-                        e.preventDefault();
-                    }
-                });
-            });
-        });
-    </script>
-</body>
-</html>
             if (orderBtn) {
                 orderBtn.addEventListener('mouseenter', function() {
                     this.style.transform = 'translateY(-3px) scale(1.05)';
