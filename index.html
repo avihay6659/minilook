@@ -1,14 +1,4 @@
-<!-- User Dropdown -->
-        <div id="user-dropdown" class="user-dropdown">
-            <div class="user-info">
-                <h4 id="dropdown-user-name">שם המשתמש</h4>
-                <p id="dropdown-user-email">user@example.com</p>
-            </div>
-            <a href="#" class="dropdown-item">הפרופיל שלי</a>
-            <a href="#" class="dropdown-item">ההזמנות שלי</a>
-            <a href="#" class="dropdown-item">הגדרות</a>
-            <a href="#" class="dropdown-item" onclick="logout()">התנתק</a>
-        </div><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -1314,43 +1304,6 @@
             
             if (userData) {
                 // User is logged in - toggle dropdown
-                toggleUserDropdown();
-            } else {
-                // User is not logged in - redirect to account page
-                console.log('Navigating to account page...');
-                
-                // שמירת המצב הנוכחי
-                sessionStorage.setItem('navigatingToAccount', 'true');
-                
-                // ניסיון מעבר לדף - עם כמה אפשרויות גיבוי
-                try {
-                    // אפשרות 1: מעבר רגיל
-                    window.location.replace('account.html');
-                } catch (error) {
-                    console.log('Error with replace, trying href...', error);
-                    try {
-                        // אפשרות 2: מעבר עם href
-                        window.location.href = 'account.html';
-                    } catch (error2) {
-                        console.log('Error with href, opening new tab...', error2);
-                        // אפשרות 3: פתיחה בטאב חדש
-                        window.open('account.html', '_self');
-                    }
-                }
-            }
-        }
-
-        function handleUserClick(event) {
-            // מונע התנהגות ברירת מחדל
-            if (event) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-            
-            const userData = sessionStorage.getItem('gameChangerUser');
-            
-            if (userData) {
-                // User is logged in - toggle dropdown
                 console.log('User is logged in, showing dropdown');
                 toggleUserDropdown();
             } else {
@@ -1432,13 +1385,6 @@
                 // Update mobile navigation
                 const mobileUserIcon = document.getElementById('mobile-user-icon');
                 mobileUserIcon.classList.add('user-logged-in');
-            }
-        }
-
-        function logout() {
-            if (confirm('האם אתה בטוח שברצונך להתנתק?')) {
-                sessionStorage.removeItem('gameChangerUser');
-                location.reload(); // Refresh page to reset UI
             }
         }
 
