@@ -1070,7 +1070,7 @@
             <div class="nav-right">
                 <a href="#" class="nav-item">BRAND</a>
                 <a href="#" class="nav-item">PHOTOSHOOT</a>
-                <a href="#" class="nav-item nav-icon" id="user-icon" onclick="handleUserClick()">
+                <a href="#" class="nav-item nav-icon" id="user-icon" onclick="handleUserClick(event)">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                         <circle cx="12" cy="7" r="4"></circle>
@@ -1111,7 +1111,7 @@
 
         <!-- Mobile Left Icons -->
         <div class="mobile-left-icons">
-            <a href="#" class="mobile-icon" id="mobile-user-icon" onclick="handleUserClick()">
+            <a href="#" class="mobile-icon" id="mobile-user-icon" onclick="handleUserClick(event)">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                     <circle cx="12" cy="7" r="4"></circle>
@@ -1141,7 +1141,7 @@
             <a href="#" class="mobile-nav-item">PHOTOSHOOT</a>
             
             <div class="mobile-user-actions">
-                <a href="#" class="mobile-action-btn" id="mobile-profile-btn" onclick="handleUserClick()">👤 Profile</a>
+                <a href="#" class="mobile-action-btn" id="mobile-profile-btn" onclick="handleUserClick(event)">👤 Profile</a>
                 <a href="#" class="mobile-action-btn">🛒 Cart</a>
             </div>
         </div>
@@ -1273,7 +1273,13 @@
         }
 
         // User Management Functions
-        function handleUserClick() {
+        function handleUserClick(event) {
+            // מונע התנהגות ברירת מחדל
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            
             const userData = sessionStorage.getItem('gameChangerUser');
             
             if (userData) {
@@ -1281,7 +1287,10 @@
                 toggleUserDropdown();
             } else {
                 // User is not logged in - redirect to account page
-                window.location.href = 'account.html';
+                // במובייל, נוסיף קצת השהיה כדי למנוע בעיות
+                setTimeout(() => {
+                    window.location.href = 'account.html';
+                }, 100);
             }
         }
 
