@@ -1101,24 +1101,12 @@
             <div class="nav-right">
                 <a href="#" class="nav-item">BRAND</a>
                 <a href="#" class="nav-item">PHOTOSHOOT</a>
-                <a href="#" class="nav-item nav-icon" id="user-icon" onclick="handleUserClick(event)">
+                <a href="account.html" class="nav-item nav-icon" id="user-icon">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
                     <span id="user-name" style="display: none; margin-right: 0.5rem; font-size: 0.8rem;"></span>
-                    
-                    <!-- User Dropdown -->
-                    <div id="user-dropdown" class="user-dropdown">
-                        <div class="user-info">
-                            <h4 id="dropdown-user-name">שם המשתמש</h4>
-                            <p id="dropdown-user-email">user@example.com</p>
-                        </div>
-                        <a href="#" class="dropdown-item" onclick="viewProfile()">הפרופיל שלי</a>
-                        <a href="#" class="dropdown-item" onclick="viewOrders()">ההזמנות שלי</a>
-                        <a href="#" class="dropdown-item" onclick="viewSettings()">הגדרות</a>
-                        <a href="#" class="dropdown-item" onclick="logout()">התנתק</a>
-                    </div>
                 </a>
                 <a href="#" class="nav-item nav-icon cart-icon">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1154,23 +1142,11 @@
 
         <!-- Mobile Left Icons -->
         <div class="mobile-left-icons">
-            <a href="#" class="mobile-icon" id="mobile-user-icon" onclick="handleUserClick(event)">
+            <a href="account.html" class="mobile-icon" id="mobile-user-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                     <circle cx="12" cy="7" r="4"></circle>
                 </svg>
-                
-                <!-- Mobile User Dropdown -->
-                <div id="mobile-user-dropdown" class="mobile-user-dropdown">
-                    <div class="user-info">
-                        <h4 id="mobile-dropdown-user-name">שם המשתמש</h4>
-                        <p id="mobile-dropdown-user-email">user@example.com</p>
-                    </div>
-                    <a href="#" class="dropdown-item" onclick="viewProfile()">הפרופיל שלי</a>
-                    <a href="#" class="dropdown-item" onclick="viewOrders()">ההזמנות שלי</a>
-                    <a href="#" class="dropdown-item" onclick="viewSettings()">הגדרות</a>
-                    <a href="#" class="dropdown-item" onclick="logout()">התנתק</a>
-                </div>
             </a>
             <a href="#" class="mobile-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1456,12 +1432,13 @@
                 // Update mobile navigation
                 const mobileUserIcon = document.getElementById('mobile-user-icon');
                 mobileUserIcon.classList.add('user-logged-in');
-                
-                // Update dropdowns
-                document.getElementById('dropdown-user-name').textContent = user.name;
-                document.getElementById('dropdown-user-email').textContent = user.email;
-                document.getElementById('mobile-dropdown-user-name').textContent = user.name;
-                document.getElementById('mobile-dropdown-user-email').textContent = user.email;
+            }
+        }
+
+        function logout() {
+            if (confirm('האם אתה בטוח שברצונך להתנתק?')) {
+                sessionStorage.removeItem('gameChangerUser');
+                location.reload(); // Refresh page to reset UI
             }
         }
 
