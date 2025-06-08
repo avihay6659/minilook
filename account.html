@@ -1364,31 +1364,66 @@
             }
         }
 
-        function toggleUserDropdown() {
-            const dropdown = document.getElementById('user-dropdown');
-            const mobileDropdown = document.getElementById('mobile-user-dropdown');
+        function handleUserClick(event) {
+            // מונע התנהגות ברירת מחדל
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
             
-            // Check if we're on mobile
-            if (window.innerWidth <= 768) {
-                mobileDropdown.classList.toggle('show');
-                
-                // Close dropdown when clicking outside
-                document.addEventListener('click', function closeMobileDropdown(event) {
-                    if (!event.target.closest('#mobile-user-icon')) {
-                        mobileDropdown.classList.remove('show');
-                        document.removeEventListener('click', closeMobileDropdown);
-                    }
-                });
+            const userData = sessionStorage.getItem('gameChangerUser');
+            
+            if (userData) {
+                // User is logged in - toggle dropdown
+                console.log('User is logged in, showing dropdown');
+                toggleUserDropdown();
             } else {
-                dropdown.classList.toggle('show');
+                // User is not logged in - redirect to account page
+                console.log('User not logged in, redirecting to account page');
+                window.location.href = 'account.html';
+            }
+        }
+
+        function toggleUserDropdown() {
+            console.log('Toggle dropdown called');
+            
+            // Check if we're on mobile or desktop
+            if (window.innerWidth <= 768) {
+                const mobileDropdown = document.getElementById('mobile-user-dropdown');
+                console.log('Mobile dropdown:', mobileDropdown);
                 
-                // Close dropdown when clicking outside
-                document.addEventListener('click', function closeDropdown(event) {
-                    if (!event.target.closest('#user-icon')) {
-                        dropdown.classList.remove('show');
-                        document.removeEventListener('click', closeDropdown);
-                    }
-                });
+                if (mobileDropdown) {
+                    mobileDropdown.classList.toggle('show');
+                    console.log('Mobile dropdown toggled, classes:', mobileDropdown.className);
+                    
+                    // Close dropdown when clicking outside
+                    setTimeout(() => {
+                        document.addEventListener('click', function closeMobileDropdown(event) {
+                            if (!event.target.closest('#mobile-user-icon')) {
+                                mobileDropdown.classList.remove('show');
+                                document.removeEventListener('click', closeMobileDropdown);
+                            }
+                        });
+                    }, 100);
+                }
+            } else {
+                const dropdown = document.getElementById('user-dropdown');
+                console.log('Desktop dropdown:', dropdown);
+                
+                if (dropdown) {
+                    dropdown.classList.toggle('show');
+                    console.log('Desktop dropdown toggled, classes:', dropdown.className);
+                    
+                    // Close dropdown when clicking outside
+                    setTimeout(() => {
+                        document.addEventListener('click', function closeDropdown(event) {
+                            if (!event.target.closest('#user-icon')) {
+                                dropdown.classList.remove('show');
+                                document.removeEventListener('click', closeDropdown);
+                            }
+                        });
+                    }, 100);
+                }
             }
         }
 
