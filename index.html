@@ -1,4 +1,14 @@
-<!DOCTYPE html>
+<!-- User Dropdown -->
+        <div id="user-dropdown" class="user-dropdown">
+            <div class="user-info">
+                <h4 id="dropdown-user-name">שם המשתמש</h4>
+                <p id="dropdown-user-email">user@example.com</p>
+            </div>
+            <a href="#" class="dropdown-item">הפרופיל שלי</a>
+            <a href="#" class="dropdown-item">ההזמנות שלי</a>
+            <a href="#" class="dropdown-item">הגדרות</a>
+            <a href="#" class="dropdown-item" onclick="logout()">התנתק</a>
+        </div><!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -732,6 +742,27 @@
             border-color: rgba(0, 255, 0, 0.3) !important;
         }
 
+        /* Mobile User Dropdown */
+        .mobile-user-dropdown {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1rem;
+            min-width: 220px;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .mobile-user-dropdown.show {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
         /* Login Modal */
         .login-modal {
             display: none;
@@ -1070,7 +1101,7 @@
             <div class="nav-right">
                 <a href="#" class="nav-item">BRAND</a>
                 <a href="#" class="nav-item">PHOTOSHOOT</a>
-                <a href="#" class="nav-item nav-icon" id="user-icon" onclick="handleUserClick(event)">
+                <a href="account.html" class="nav-item nav-icon" id="user-icon">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                         <circle cx="12" cy="7" r="4"></circle>
@@ -1111,7 +1142,7 @@
 
         <!-- Mobile Left Icons -->
         <div class="mobile-left-icons">
-            <a href="#" class="mobile-icon" id="mobile-user-icon" onclick="handleUserClick(event)">
+            <a href="account.html" class="mobile-icon" id="mobile-user-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                     <circle cx="12" cy="7" r="4"></circle>
@@ -1141,7 +1172,6 @@
             <a href="#" class="mobile-nav-item">PHOTOSHOOT</a>
             
             <div class="mobile-user-actions">
-                <a href="#" class="mobile-action-btn" id="mobile-profile-btn" onclick="handleUserClick(event)">👤 Profile</a>
                 <a href="#" class="mobile-action-btn">🛒 Cart</a>
             </div>
         </div>
@@ -1310,16 +1340,79 @@
             }
         }
 
-        function toggleUserDropdown() {
-            const dropdown = document.getElementById('user-dropdown');
-            dropdown.classList.toggle('show');
+        function handleUserClick(event) {
+            // מונע התנהגות ברירת מחדל
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
             
-            // Close dropdown when clicking outside
-            document.addEventListener('click', function(event) {
-                if (!event.target.closest('#user-icon') && !event.target.closest('#user-dropdown')) {
-                    dropdown.classList.remove('show');
+            const userData = sessionStorage.getItem('gameChangerUser');
+            
+            if (userData) {
+                // User is logged in - toggle dropdown
+                console.log('User is logged in, showing dropdown');
+                toggleUserDropdown();
+            } else {
+                // User is not logged in - redirect to account page
+                console.log('User not logged in, redirecting to account page');
+                window.location.href = 'account.html';
+            }
+        }
+
+        function toggleUserDropdown() {
+            console.log('Toggle dropdown called');
+            
+            // Check if we're on mobile or desktop
+            if (window.innerWidth <= 768) {
+                const mobileDropdown = document.getElementById('mobile-user-dropdown');
+                console.log('Mobile dropdown:', mobileDropdown);
+                
+                if (mobileDropdown) {
+                    mobileDropdown.classList.toggle('show');
+                    console.log('Mobile dropdown toggled, classes:', mobileDropdown.className);
+                    
+                    // Close dropdown when clicking outside
+                    setTimeout(() => {
+                        document.addEventListener('click', function closeMobileDropdown(event) {
+                            if (!event.target.closest('#mobile-user-icon')) {
+                                mobileDropdown.classList.remove('show');
+                                document.removeEventListener('click', closeMobileDropdown);
+                            }
+                        });
+                    }, 100);
                 }
-            });
+            } else {
+                const dropdown = document.getElementById('user-dropdown');
+                console.log('Desktop dropdown:', dropdown);
+                
+                if (dropdown) {
+                    dropdown.classList.toggle('show');
+                    console.log('Desktop dropdown toggled, classes:', dropdown.className);
+                    
+                    // Close dropdown when clicking outside
+                    setTimeout(() => {
+                        document.addEventListener('click', function closeDropdown(event) {
+                            if (!event.target.closest('#user-icon')) {
+                                dropdown.classList.remove('show');
+                                document.removeEventListener('click', closeDropdown);
+                            }
+                        });
+                    }, 100);
+                }
+            }
+        }
+
+        function viewProfile() {
+            window.location.href = 'account.html';
+        }
+
+        function viewOrders() {
+            alert('מעבר לעמוד ההזמנות...');
+        }
+
+        function viewSettings() {
+            alert('מעבר להגדרות...');
         }
 
         function updateUserUI() {
@@ -1338,14 +1431,14 @@
                 
                 // Update mobile navigation
                 const mobileUserIcon = document.getElementById('mobile-user-icon');
-                const mobileProfileBtn = document.getElementById('mobile-profile-btn');
-                
                 mobileUserIcon.classList.add('user-logged-in');
-                mobileProfileBtn.innerHTML = `👤 ${user.name}`;
-                
-                // Update dropdown
-                document.getElementById('dropdown-user-name').textContent = user.name;
-                document.getElementById('dropdown-user-email').textContent = user.email;
+            }
+        }
+
+        function logout() {
+            if (confirm('האם אתה בטוח שברצונך להתנתק?')) {
+                sessionStorage.removeItem('gameChangerUser');
+                location.reload(); // Refresh page to reset UI
             }
         }
 
