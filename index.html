@@ -1287,10 +1287,26 @@
                 toggleUserDropdown();
             } else {
                 // User is not logged in - redirect to account page
-                // במובייל, נוסיף קצת השהיה כדי למנוע בעיות
-                setTimeout(() => {
-                    window.location.href = 'account.html';
-                }, 100);
+                console.log('Navigating to account page...');
+                
+                // שמירת המצב הנוכחי
+                sessionStorage.setItem('navigatingToAccount', 'true');
+                
+                // ניסיון מעבר לדף - עם כמה אפשרויות גיבוי
+                try {
+                    // אפשרות 1: מעבר רגיל
+                    window.location.replace('account.html');
+                } catch (error) {
+                    console.log('Error with replace, trying href...', error);
+                    try {
+                        // אפשרות 2: מעבר עם href
+                        window.location.href = 'account.html';
+                    } catch (error2) {
+                        console.log('Error with href, opening new tab...', error2);
+                        // אפשרות 3: פתיחה בטאב חדש
+                        window.open('account.html', '_self');
+                    }
+                }
             }
         }
 
@@ -1342,6 +1358,12 @@
 
         // אפקט נוסף לכפתור
         document.addEventListener('DOMContentLoaded', function() {
+            // בדיקה אם חזרנו מדף החשבון
+            if (sessionStorage.getItem('navigatingToAccount') === 'true') {
+                sessionStorage.removeItem('navigatingToAccount');
+                console.log('Returned from account navigation attempt');
+            }
+            
             // Check if user is logged in and update UI
             updateUserUI();
             
