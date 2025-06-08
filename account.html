@@ -742,6 +742,27 @@
             border-color: rgba(0, 255, 0, 0.3) !important;
         }
 
+        /* Mobile User Dropdown */
+        .mobile-user-dropdown {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1rem;
+            min-width: 220px;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .mobile-user-dropdown.show {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
         /* Login Modal */
         .login-modal {
             display: none;
@@ -1138,6 +1159,18 @@
                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                     <circle cx="12" cy="7" r="4"></circle>
                 </svg>
+                
+                <!-- Mobile User Dropdown -->
+                <div id="mobile-user-dropdown" class="mobile-user-dropdown">
+                    <div class="user-info">
+                        <h4 id="mobile-dropdown-user-name">שם המשתמש</h4>
+                        <p id="mobile-dropdown-user-email">user@example.com</p>
+                    </div>
+                    <a href="#" class="dropdown-item" onclick="viewProfile()">הפרופיל שלי</a>
+                    <a href="#" class="dropdown-item" onclick="viewOrders()">ההזמנות שלי</a>
+                    <a href="#" class="dropdown-item" onclick="viewSettings()">הגדרות</a>
+                    <a href="#" class="dropdown-item" onclick="logout()">התנתק</a>
+                </div>
             </a>
             <a href="#" class="mobile-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1163,7 +1196,6 @@
             <a href="#" class="mobile-nav-item">PHOTOSHOOT</a>
             
             <div class="mobile-user-actions">
-                <a href="#" class="mobile-action-btn" id="mobile-profile-btn" onclick="handleUserClick(event)">👤 Profile</a>
                 <a href="#" class="mobile-action-btn">🛒 Cart</a>
             </div>
         </div>
@@ -1334,15 +1366,30 @@
 
         function toggleUserDropdown() {
             const dropdown = document.getElementById('user-dropdown');
-            dropdown.classList.toggle('show');
+            const mobileDropdown = document.getElementById('mobile-user-dropdown');
             
-            // Close dropdown when clicking outside
-            document.addEventListener('click', function closeDropdown(event) {
-                if (!event.target.closest('#user-icon')) {
-                    dropdown.classList.remove('show');
-                    document.removeEventListener('click', closeDropdown);
-                }
-            });
+            // Check if we're on mobile
+            if (window.innerWidth <= 768) {
+                mobileDropdown.classList.toggle('show');
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function closeMobileDropdown(event) {
+                    if (!event.target.closest('#mobile-user-icon')) {
+                        mobileDropdown.classList.remove('show');
+                        document.removeEventListener('click', closeMobileDropdown);
+                    }
+                });
+            } else {
+                dropdown.classList.toggle('show');
+                
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function closeDropdown(event) {
+                    if (!event.target.closest('#user-icon')) {
+                        dropdown.classList.remove('show');
+                        document.removeEventListener('click', closeDropdown);
+                    }
+                });
+            }
         }
 
         function viewProfile() {
@@ -1373,14 +1420,13 @@
                 
                 // Update mobile navigation
                 const mobileUserIcon = document.getElementById('mobile-user-icon');
-                const mobileProfileBtn = document.getElementById('mobile-profile-btn');
-                
                 mobileUserIcon.classList.add('user-logged-in');
-                mobileProfileBtn.innerHTML = `👤 ${user.name}`;
                 
-                // Update dropdown
+                // Update dropdowns
                 document.getElementById('dropdown-user-name').textContent = user.name;
                 document.getElementById('dropdown-user-email').textContent = user.email;
+                document.getElementById('mobile-dropdown-user-name').textContent = user.name;
+                document.getElementById('mobile-dropdown-user-email').textContent = user.email;
             }
         }
 
