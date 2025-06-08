@@ -354,6 +354,82 @@
             font-size: 0.9rem;
             display: none;
         }
+
+        /* User Profile Section */
+        .user-profile {
+            display: none;
+            text-align: center;
+        }
+
+        .user-profile.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .profile-info {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #000;
+            margin: 0 auto 1rem;
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-email {
+            opacity: 0.7;
+            margin-bottom: 1rem;
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 1rem;
+            flex-direction: column;
+        }
+
+        .action-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 1rem;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .action-btn.logout {
+            background: rgba(255, 0, 0, 0.1);
+            border-color: rgba(255, 0, 0, 0.3);
+            color: #ff6b6b;
+        }
+
+        .action-btn.logout:hover {
+            background: rgba(255, 0, 0, 0.2);
+        }
     </style>
 </head>
 <body>
@@ -375,73 +451,92 @@
             <div class="brand-subtitle">FASHION STORE</div>
         </div>
 
-        <div class="form-tabs">
-            <button class="tab-btn active" onclick="switchTab('login')">התחברות</button>
-            <button class="tab-btn" onclick="switchTab('register')">הרשמה</button>
+        <!-- User Profile Section (shown when logged in) -->
+        <div id="user-profile" class="user-profile">
+            <div class="profile-info">
+                <div class="profile-avatar" id="profile-avatar">👤</div>
+                <div class="profile-name" id="profile-name">שם המשתמש</div>
+                <div class="profile-email" id="profile-email">user@example.com</div>
+            </div>
+            
+            <div class="profile-actions">
+                <button class="action-btn" onclick="viewOrders()">ההזמנות שלי</button>
+                <button class="action-btn" onclick="editProfile()">עריכת פרופיל</button>
+                <button class="action-btn" onclick="viewSettings()">הגדרות</button>
+                <button class="action-btn logout" onclick="logout()">התנתק</button>
+            </div>
         </div>
 
-        <div id="error-message" class="error-message"></div>
-        <div id="success-message" class="success-message"></div>
+        <!-- Login/Register Forms (shown when not logged in) -->
+        <div id="auth-forms">
+            <div class="form-tabs">
+                <button class="tab-btn active" onclick="switchTab('login')">התחברות</button>
+                <button class="tab-btn" onclick="switchTab('register')">הרשמה</button>
+            </div>
 
-        <!-- Login Form -->
-        <div id="login-form" class="form-section active">
-            <form onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label for="login-email">כתובת אימייל</label>
-                    <input type="email" id="login-email" placeholder="הכנס את כתובת האימייל שלך" required>
+            <div id="error-message" class="error-message"></div>
+            <div id="success-message" class="success-message"></div>
+
+            <!-- Login Form -->
+            <div id="login-form" class="form-section active">
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="login-email">כתובת אימייל</label>
+                        <input type="email" id="login-email" placeholder="הכנס את כתובת האימייל שלך" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="login-password">סיסמה</label>
+                        <input type="password" id="login-password" placeholder="הכנס את הסיסמה שלך" required>
+                    </div>
+
+                    <div class="forgot-password">
+                        <a href="#" onclick="forgotPassword()">שכחת סיסמה?</a>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <span class="btn-text">התחבר</span>
+                        <div class="loading"></div>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Register Form -->
+            <div id="register-form" class="form-section">
+                <form onsubmit="handleRegister(event)">
+                    <div class="form-group">
+                        <label for="register-name">שם מלא</label>
+                        <input type="text" id="register-name" placeholder="הכנס את השם המלא שלך" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="register-email">כתובת אימייל</label>
+                        <input type="email" id="register-email" placeholder="הכנס את כתובת האימייל שלך" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="register-password">סיסמה</label>
+                        <input type="password" id="register-password" placeholder="בחר סיסמה חזקה" required minlength="6">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="register-confirm">אימוד סיסמה</label>
+                        <input type="password" id="register-confirm" placeholder="הכנס שוב את הסיסמה" required>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <span class="btn-text">הירשם</span>
+                        <div class="loading"></div>
+                    </button>
+                </form>
+            </div>
+
+            <div class="social-login">
+                <div class="social-text">או התחבר באמצעות</div>
+                <div class="social-buttons">
+                    <a href="#" class="social-btn" onclick="socialLogin('google')">📧 Google</a>
+                    <a href="#" class="social-btn" onclick="socialLogin('facebook')">📘 Facebook</a>
                 </div>
-                
-                <div class="form-group">
-                    <label for="login-password">סיסמה</label>
-                    <input type="password" id="login-password" placeholder="הכנס את הסיסמה שלך" required>
-                </div>
-
-                <div class="forgot-password">
-                    <a href="#" onclick="forgotPassword()">שכחת סיסמה?</a>
-                </div>
-
-                <button type="submit" class="submit-btn">
-                    <span class="btn-text">התחבר</span>
-                    <div class="loading"></div>
-                </button>
-            </form>
-        </div>
-
-        <!-- Register Form -->
-        <div id="register-form" class="form-section">
-            <form onsubmit="handleRegister(event)">
-                <div class="form-group">
-                    <label for="register-name">שם מלא</label>
-                    <input type="text" id="register-name" placeholder="הכנס את השם המלא שלך" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="register-email">כתובת אימייל</label>
-                    <input type="email" id="register-email" placeholder="הכנס את כתובת האימייל שלך" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="register-password">סיסמה</label>
-                    <input type="password" id="register-password" placeholder="בחר סיסמה חזקה" required minlength="6">
-                </div>
-
-                <div class="form-group">
-                    <label for="register-confirm">אימוד סיסמה</label>
-                    <input type="password" id="register-confirm" placeholder="הכנס שוב את הסיסמה" required>
-                </div>
-
-                <button type="submit" class="submit-btn">
-                    <span class="btn-text">הירשם</span>
-                    <div class="loading"></div>
-                </button>
-            </form>
-        </div>
-
-        <div class="social-login">
-            <div class="social-text">או התחבר באמצעות</div>
-            <div class="social-buttons">
-                <a href="#" class="social-btn" onclick="socialLogin('google')">📧 Google</a>
-                <a href="#" class="social-btn" onclick="socialLogin('facebook')">📘 Facebook</a>
             </div>
         </div>
     </div>
@@ -480,21 +575,21 @@
                 showLoading(false);
                 
                 if (email && password) {
-                    // Save user data to localStorage
+                    // Save user data to sessionStorage (changed from localStorage)
                     const userData = {
                         name: email.split('@')[0], // Use email prefix as name
                         email: email,
                         loginTime: new Date().toISOString()
                     };
                     
-                    localStorage.setItem('gameChangerUser', JSON.stringify(userData));
+                    sessionStorage.setItem('gameChangerUser', JSON.stringify(userData));
                     
-                    showSuccess('התחברת בהצלחה! מעביר אותך לעמוד הראשי...');
+                    showSuccess('התחברת בהצלחה!');
                     
-                    // Redirect to main page after 2 seconds
+                    // Show user profile instead of redirecting
                     setTimeout(() => {
-                        window.location.href = 'index.html';
-                    }, 2000);
+                        showUserProfile(userData);
+                    }, 1000);
                 } else {
                     showError('אימייל או סיסמה שגויים');
                 }
@@ -529,14 +624,14 @@
                     loginTime: new Date().toISOString()
                 };
                 
-                localStorage.setItem('gameChangerUser', JSON.stringify(userData));
+                sessionStorage.setItem('gameChangerUser', JSON.stringify(userData));
                 
-                showSuccess('נרשמת בהצלחה! מעביר אותך לעמוד הראשי...');
+                showSuccess('נרשמת בהצלחה!');
                 
-                // Redirect to main page after 2 seconds
+                // Show user profile instead of redirecting
                 setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 2000);
+                    showUserProfile(userData);
+                }, 1000);
             }, 1500);
         }
 
@@ -562,14 +657,59 @@
                     provider: provider
                 };
                 
-                localStorage.setItem('gameChangerUser', JSON.stringify(userData));
+                sessionStorage.setItem('gameChangerUser', JSON.stringify(userData));
                 
-                showSuccess(`התחברת בהצלחה דרך ${provider}! מעביר אותך לעמוד הראשי...`);
+                showSuccess(`התחברת בהצלחה דרך ${provider}!`);
                 
                 setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 2000);
+                    showUserProfile(userData);
+                }, 1000);
             }, 1000);
+        }
+
+        function showUserProfile(userData) {
+            // Hide auth forms
+            document.getElementById('auth-forms').style.display = 'none';
+            
+            // Show user profile
+            const profileSection = document.getElementById('user-profile');
+            profileSection.classList.add('active');
+            
+            // Update profile info
+            document.getElementById('profile-name').textContent = userData.name;
+            document.getElementById('profile-email').textContent = userData.email;
+            document.getElementById('profile-avatar').textContent = userData.name.charAt(0).toUpperCase();
+            
+            hideMessages();
+        }
+
+        function viewOrders() {
+            alert('מעבר לעמוד ההזמנות...');
+        }
+
+        function editProfile() {
+            alert('מעבר לעריכת פרופיל...');
+        }
+
+        function viewSettings() {
+            alert('מעבר להגדרות...');
+        }
+
+        function logout() {
+            if (confirm('האם אתה בטוח שברצונך להתנתק?')) {
+                sessionStorage.removeItem('gameChangerUser');
+                
+                // Hide profile and show auth forms
+                document.getElementById('user-profile').classList.remove('active');
+                document.getElementById('auth-forms').style.display = 'block';
+                
+                showSuccess('התנתקת בהצלחה');
+                
+                // Clear form fields
+                document.querySelectorAll('input').forEach(input => {
+                    input.value = '';
+                });
+            }
         }
 
         function showLoading(show) {
@@ -602,14 +742,12 @@
             document.getElementById('success-message').style.display = 'none';
         }
 
-        // Check if user is already logged in
+        // Check if user is already logged in when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            const userData = localStorage.getItem('gameChangerUser');
+            const userData = sessionStorage.getItem('gameChangerUser');
             if (userData) {
-                showSuccess('אתה כבר מחובר למערכת');
-                setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 1500);
+                const user = JSON.parse(userData);
+                showUserProfile(user);
             }
         });
     </script>
